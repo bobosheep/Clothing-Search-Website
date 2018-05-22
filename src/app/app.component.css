@@ -1,0 +1,23 @@
+.footer{
+    bottom: 0;
+}
+.Gstyle{
+    color: rgba(243, 30, 30, 0.959);
+    animation: GstyleAnimate 3s ease-in-out;
+}
+.YOCstyle{
+    color: rgba(241, 238, 42, 0.979);
+    animation: YOCstyleAnimate 3s linear;
+}
+
+@keyframes GstyleAnimate{
+    0%{color:rgba(243, 30, 30, 0.959);}
+    50%{color:rgba(241, 238, 42, 0.979);}
+    100%{color:rgba(243, 30, 30, 0.959);}
+}
+@keyframes YOCstyleAnimate{
+    0%{color:rgba(241, 238, 42, 0.979);}
+    50%{color:rgba(243, 30, 30, 0.959);}
+    100%{color:rgba(241, 238, 42, 0.979);}
+    
+}

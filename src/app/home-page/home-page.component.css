@@ -1,0 +1,29 @@
+.animate_left{
+    position: relative;
+    -webkit-animation: moveLeft .5s ease-out 1;
+    animation: moveLeft .5s ease-out 1 ;
+}
+
+.animate_left_1{
+    position: relative;
+    -webkit-animation: moveLeft_1 1.5s ease-out 1 ;
+    animation: moveLeft_1 1.5s ease-out 1  ;
+}
+
+@-webkit-keyframes moveLeft{
+    0% {opacity: 0; padding-left: 50px;}
+    100% {opacity: 1; padding-left: 0px;}
+}
+@keyframes moveLeft{
+    0% {opacity: 0; padding-left: 50px;}
+    100% {opacity: 1; padding-left: 0px;}
+}
+@-webkit-keyframes moveLeft_1{
+    0% {opacity: 0; padding-left: 50px;}
+    100% {opacity: 1; padding-left: 0px;}
+}
+@keyframes moveLeft_1{
+    0% {opacity: 0; padding-left: 50px;}
+    67% {opacity: 0; padding-left: 50px;}
+    100% {opacity: 1; padding-left: 0px;}
+}

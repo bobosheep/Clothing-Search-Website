@@ -1,0 +1,30 @@
+.w-fix{
+    width: 70%;
+    margin-left: 15%;
+}
+.animate_left{
+    position: relative;
+    -webkit-animation: moveLeft .5s ease-out 1;
+    animation: moveLeft .5s ease-out 1 ;
+}
+.on_sale{
+    color: rgb(238, 235, 80);
+    background-color: rgb(226, 37, 37);
+}
+
+
+@-webkit-keyframes moveLeft{
+    0% {opacity: 0; padding-left: 62px;}
+    100% {opacity: 1; padding-left: 12px;}
+}
+@keyframes moveLeft{
+    0% {opacity: 0; padding-left: 62px;}
+    100% {opacity: 1; padding-left: 12px;}
+}
+
+.clothes_name{
+    color: rgb(46, 49, 82);
+}
+.clothes_name:hover{
+    color: rgb(87, 97, 212);
+}

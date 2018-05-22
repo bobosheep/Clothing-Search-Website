@@ -1,0 +1,68 @@
+<section class="section">
+    <div class="container"> 
+        <div class="columns">
+            <div class="column is-7 is-offset-2">
+                <div class="field">
+                    <div class="control">
+                        <input [(ngModel)]="query" (keyup.enter)="getSearch()" class="input is-rounded" type="text" placeholder="What clothing you want">
+                    </div>
+                </div>
+            </div>
+            <div class="column is-1 animate_left">
+                <button class="button is-dark is-outlined" (click)="getSearch()">Search!</button>    
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--顯示結果-->
+
+<section class="section" *ngIf="have_result">
+    <div class="container">
+        <div class="columns">
+            <div class="column is-3 is-offset-3 has-text-centered">    
+                <span> Search Time : {{ result.took_time }} ms</span>
+            </div>
+            <div class="column is-3 has-text-centered">    
+                <span> Search Result : {{ result.hits_total }} </span>
+            </div>
+        </div>
+        <article class="media w-fix " *ngFor="let clo of clothes; let i = index">
+            <figure class="media-left">
+                <a target="_blank" class="image is-256x256" (click)="launchModal( clo.obj_id)">
+                        <img src="{{ clo.img_url }}" alt="{{ clo.name }}">
+                </a>
+            </figure>
+            <div class="modal" [ngClass]="" id="{{ clo.obj_id }}">
+                <div class="modal-background"></div>
+                    <div class="modal-content">
+                        <p class="image is-square">
+                        <img src="{{ clo.img_url }}" alt="{{ clo.name }}">
+                        </p>
+                    </div>  
+                <button class="modal-close is-large" aria-label="close" (click)="closeModal( clo.obj_id)"></button>
+            </div>
+            <div class="media-content">
+                <div class="content">
+                    <a target="_blank" href="{{ clo.url }}"><h2 class="title clothes_name">{{ clo.name }} - {{ clo.gender }}</h2></a>
+                    <p><b>顏色</b> : {{ clo.color }} </p> 
+                    <p><b>其他顏色</b> : <span *ngFor="let color of clo.colors; let i = index">{{ color }} <span *ngIf="i != clo.colors.length - 1">,</span> </span></p>
+                    <p><b>Size</b> : <span *ngFor="let size of clo.sizes; let i = index">{{ size }} <span *ngIf="i != clo.sizes.length - 1">,</span> </span></p>
+                    <span class="on_sale" *ngIf="clo.store_price > clo.price">On Sale!</span>
+                    <p><b>{{ clo.price | currency: 'TWD' }}</b> </p>
+                    <s *ngIf="clo.store_price > clo.price">原價 : {{ clo.store_price | currency: 'TWD' }}</s>
+                    <p>最近更新 : {{ clo.last_updated | date }}</p>
+                </div>
+                
+            </div>
+            <!--div class="media-right">
+                <a class="level-item">
+                    <span class="icon has-text-danger"><i class="fas fa-heart"></i></span>
+                </a>
+            </div-->
+            
+        </article>
+    </div>
+</section>
+
+

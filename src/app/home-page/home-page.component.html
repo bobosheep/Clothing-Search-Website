@@ -1,0 +1,59 @@
+<section class="section">
+  <div class="container">
+    <!--div class="columns">
+      <div class="column">
+
+      </div>
+    </div-->
+    <h1 class="title has-text-centered animate_left">GO</h1>
+
+    <div class="buttons is-centered animate_left_1">
+        <a routerLink="/search" title="Search" >
+          <span class="button is-large is-dark is-outlined">Search!</span>    
+        </a>
+        <span class="button" style="visibility: hidden;"></span>
+        <a title="Match Your clothes">
+          <span class="button is-large is-lite is-outlined" (click)="getRandomMatch()" >Match</span>       
+        </a>
+    </div>
+  </div>
+</section>
+
+<section class="section" >
+  <div class="container">
+    <div class="columns">
+      <div class="column">
+        <figure  class="image is-256x256">
+          <a target="_blank" href="{{ resClothes.url }}">
+            <img src="{{ resClothes.img_url }}">
+          </a>
+        </figure>
+      </div>
+      <div class="column">
+        <figure class="image is-256x256">
+          <a target="_blank" href="{{ resPants.url }}">
+            <img src="{{ resPants.img_url }}">
+          </a>
+        </figure>
+      </div>
+      <div class="column">
+        <figure class="image is-256x256" >
+            <a target="_blank" href="{{ resShoes.url }}">
+              <img src="{{ resShoes.img_url }}">
+            </a>
+        </figure>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <p>
+        This is a website for clothing.
+      </p>
+    </div>
+  </div>
+</footer>

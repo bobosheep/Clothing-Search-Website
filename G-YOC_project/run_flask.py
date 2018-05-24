@@ -9,7 +9,8 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def hello_world():
+@app.route('/home')
+def home_page():
     return render_template('index.html')
 
 @app.route('/search', methods=['POST'])
@@ -22,7 +23,7 @@ def search_ALL():
         return 'Error'
 
 @app.route('/search/<webname>', methods=['POST'])
-def search_clothing(webname='lativ'):
+def search_ByWeb(webname='lativ'):
     if request.method == 'POST':
         print(request.data)
         res = es.search(index="clothes", doc_type=webname, body=request.data)

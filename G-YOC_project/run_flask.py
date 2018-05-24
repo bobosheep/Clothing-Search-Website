@@ -13,14 +13,14 @@ app = Flask(__name__)
 def home_page():
     return render_template('index.html')
 
-@app.route('/search', methods=['POST'])
+@app.route('/search', methods=['POST','GET'])
 def search_ALL():
     if request.method == 'POST':
         print(request.data)
         res = es.search(index="clothes", body=request.data)
         return json.dumps(res)
     else:
-        return 'Error'
+        return render_template('index.html')
 
 @app.route('/search/<webname>', methods=['POST'])
 def search_ByWeb(webname='lativ'):
@@ -30,6 +30,10 @@ def search_ByWeb(webname='lativ'):
         return json.dumps(res)
     else:
         return webname
+
+@app.errorhandler(404)
+def not_found(error):
+    return render_template('error.html'), 404
 
 if __name__ == '__main__':
     app.debug = True

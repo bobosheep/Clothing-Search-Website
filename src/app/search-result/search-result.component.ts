@@ -66,7 +66,7 @@ export class SearchResultComponent implements OnInit {
     if(this.query.length > 0){
       console.log(this.query);
       this.queryBody.query.match.name = this.query;
-      this.http.post(`http://localhost:9200/clothes/_search`, this.queryBody, this.httpOptions)
+      this.http.post(`http://localhost:5000/search/lativ`, this.queryBody, this.httpOptions)
       .subscribe(
         (datas:any) => {
           console.log(datas);

@@ -63,7 +63,7 @@ export class HomePageComponent implements OnInit {
     this.queryShoes.from = Math.floor(Math.random() * 200);
 
     console.log('click');
-    this.http.post(`http://localhost:9200/clothes/_search`, this.queryClothes, this.httpOptions)
+    this.http.post(`http://localhost:5000/search`, this.queryClothes, this.httpOptions)
     .subscribe(
       (datas:any) =>{
         let data = datas.hits.hits;
@@ -75,7 +75,7 @@ export class HomePageComponent implements OnInit {
       }
     )
 
-    this.http.post(`http://localhost:9200/clothes/_search`, this.queryPants, this.httpOptions)
+    this.http.post(`http://localhost:5000/search`, this.queryPants, this.httpOptions)
     .subscribe(
       (datas:any) =>{
         let data = datas.hits.hits;
@@ -87,7 +87,7 @@ export class HomePageComponent implements OnInit {
       }
     )
 
-    this.http.post(`http://localhost:9200/clothes/_search`, this.queryShoes, this.httpOptions)
+    this.http.post(`http://localhost:5000/search`, this.queryShoes, this.httpOptions)
     .subscribe(
       (datas:any) =>{
         let data = datas.hits.hits;

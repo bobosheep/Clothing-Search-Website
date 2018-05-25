@@ -10,6 +10,17 @@
     animation: moveLeft_1 1.5s ease-out 1  ;
 }
 
+.package-price{
+    border-left: 0 ;
+    border-right: 0;
+    border-style: double;
+}
+
+.go-centered{
+    margin-left: auto;
+    margin-right: auto;
+}
+
 @-webkit-keyframes moveLeft{
     0% {opacity: 0; padding-left: 50px;}
     100% {opacity: 1; padding-left: 0px;}

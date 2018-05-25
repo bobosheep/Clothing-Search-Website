@@ -5,6 +5,7 @@ import { HttpHeaders } from '@angular/common/http';
 
 import { AppComponent } from '../app.component';
 import { SearchQuery , QueryBody } from '../query' ;
+import { parse } from 'querystring';
 
 @Component({
   selector: 'app-home-page',
@@ -54,6 +55,7 @@ export class HomePageComponent implements OnInit {
   resClothes : any;
   resPants : any;
   resShoes : any;
+  package_price : number = 0;
 
   constructor(private http:HttpClient) { }
 
@@ -61,7 +63,7 @@ export class HomePageComponent implements OnInit {
     this.queryClothes.from = Math.floor(Math.random() * 2000);
     this.queryPants.from = Math.floor(Math.random() * 2000);
     this.queryShoes.from = Math.floor(Math.random() * 200);
-
+    this.package_price = 0;
     console.log('click');
     this.http.post(`http://localhost:5000/search`, this.queryClothes, this.httpOptions)
     .subscribe(
@@ -70,6 +72,8 @@ export class HomePageComponent implements OnInit {
         //console.log(data);
         if(data.length > 0){
           this.resClothes = data[0]._source;
+          this.resClothes.price = parseInt(this.resClothes.price)
+          this.package_price += this.resClothes.price;
           //console.log(this.resClothes);
         }
       }
@@ -82,6 +86,8 @@ export class HomePageComponent implements OnInit {
         //console.log(data);
         if(data.length > 0){
           this.resPants = data[0]._source;
+          this.resPants.price = parseInt(this.resPants.price)
+          this.package_price += this.resPants.price;
           //console.log(this.resClothes);
         }
       }
@@ -94,6 +100,8 @@ export class HomePageComponent implements OnInit {
         //console.log(data);
         if(data.length > 0){
           this.resShoes = data[0]._source;
+          this.resShoes.price = parseInt(this.resShoes.price)
+          this.package_price += this.resShoes.price;
           //console.log(this.resClothes);
         }
       }

@@ -1,12 +1,17 @@
-.w-fix{
-    width: 70%;
-    margin-left: 15%;
+
+@media (min-width : 769px){
+    .animate_left{
+        position: relative;
+        -webkit-animation: moveLeft .5s ease-out 1;
+        animation: moveLeft .5s ease-out 1 ;
+    }
+    .w-fix{
+        width: 70%;
+        margin-left: 15%;
+    }
 }
-.animate_left{
-    position: relative;
-    -webkit-animation: moveLeft .5s ease-out 1;
-    animation: moveLeft .5s ease-out 1 ;
-}
+
+
 .on_sale{
     color: rgb(238, 235, 80);
     background-color: rgb(226, 37, 37);

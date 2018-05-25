@@ -5,8 +5,9 @@
 
       </div>
     </div-->
-    <h1 class="title has-text-centered animate_left">GO</h1>
-
+    <div routerLink="/home" class="is-spaced" style="margin-bottom: 20px;">
+      <div class="image is-64x64 go-centered"><img src="../assets/G-YOC.png" alt="Logo"></div>
+    </div>
     <div class="buttons is-centered animate_left_1">
         <a routerLink="/search" title="Search" >
           <span class="button is-large is-dark is-outlined">Search!</span>    
@@ -45,14 +46,25 @@
       </div>
       
     </div>
+    <div class="columns">
+      <div class="column is-4 is-offset-4">
+        <p class="has-text-centered package-price is-size-4"> 
+         Package Price <span class="has-text-danger">{{ package_price | currency : 'TWD' }}</span>
+        </p>
+      </div>
+    </div>
   </div>
 </section>
 
-<footer class="footer">
+<footer class="footer is-dark">
   <div class="container">
     <div class="content has-text-centered">
       <p>
-        This is a website for clothing.
+        This is a website for getting your own clothing.
+      </p>      
+      <p>
+        <a target="_blank" href="https://github.com/bobosheep/G-YOC"><span class="icon is-medium has-text-black"><i class="fab fa-github fa-2x"></i></span></a>
+        <a target="_blank" href="https://www.facebook.com/G-YOC-139433063583923/"><span class="icon is-medium"><i class="fab fa-facebook fa-2x" ></i></span></a>
       </p>
     </div>
   </div>

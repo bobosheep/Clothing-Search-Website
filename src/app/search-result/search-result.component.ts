@@ -70,7 +70,7 @@ export class SearchResultComponent implements OnInit {
       .subscribe(
         (datas:any) => {
           console.log(datas);
-          this.response = datas.hits.hits;
+          this.response = datas.hits.hits; 
           this.result.took_time = datas.took;
           this.result.hits_total = datas.hits.total;
           this.clothes = [];

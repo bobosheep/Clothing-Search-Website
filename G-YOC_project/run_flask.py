@@ -2,9 +2,17 @@ from flask import Flask , send_from_directory
 from flask import request
 from flask import render_template
 from elasticsearch import Elasticsearch
+from pymongo.errors import BulkWriteError
+from pymongo import MongoClient
+
+import time
+import pymongo
 import json
 es = Elasticsearch()
 app = Flask(__name__, static_url_path='')
+
+client = MongoClient('localhost', 27017)
+db = client.Clothes
 
 
 
@@ -20,8 +28,14 @@ def send_js(path):
 @app.route('/search', methods=['POST','GET'])
 def search_ALL():
     if request.method == 'POST':
-        print(request.data)
+        #req = json.load(request.data)
+        #print(req)
         res = es.search(index="clothes", body=request.data)
+        #query = req.query.match.name
+        #res = list(db.Clothes.find({'$text':{'$search': query}}, {'score':{'$meta':"textScore"}}))
+
+        #print(res)
+
         return json.dumps(res)
     else:
         return render_template('index.html')
@@ -29,8 +43,17 @@ def search_ALL():
 @app.route('/search/<webname>', methods=['POST'])
 def search_ByWeb(webname='lativ'):
     if request.method == 'POST':
-        print(request.data)
+        #data = request.data
+        #req = json.loads(data)
+        #print(req)
         res = es.search(index="clothes", doc_type=webname, body=request.data)
+        #query = req['query']['match']['name']
+        
+        #res = list(db.Lativ.find({'$text':{'$search': query}}, {'score':{'$meta':"textScore"}}))
+        #for i in res:
+            #i['_id'] = str(i['_id'])
+            #print(i)
+        
         return json.dumps(res)
     else:
         return webname

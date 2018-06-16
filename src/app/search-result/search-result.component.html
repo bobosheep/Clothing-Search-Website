@@ -1,19 +1,29 @@
 <section class="section">
     <div class="container"> 
-        <div class="columns">
-            <div class="column is-1-tablet is-offset-2-tablet is-hidden-mobile">
+        <div class="columns ">
+            <div class="column is-1-tablet is-offset-1-tablet is-hidden-mobile">
                 <div >
                     <div class="image is-64x64 "><img src="../../assets/G-YOC.png" alt="Logo"></div>
                 </div>
             </div>
-            <div class="column is-6-tablet is-12-mobile ">
+            <div class="column is-7-tablet is-12-mobile ">
                 <div class="control">
-                    <input [(ngModel)]="query" (keyup.enter)="getSearch()" class="input is-rounded " type="text" placeholder="What clothing you want">
+                    <input [(ngModel)]="query" (keyup.enter)="getSearch()" class="input is-rounded " type="text" placeholder="What clothing you want in {{ genderOption }}">
                 </div>
             </div>
-            <div class="column is-1-mobile is-1-tablet is-offset-4-mobile animate_left">
-                <button class="button is-dark is-outlined " (click)="getSearch()">Search!</button>    
+            <div class="column is-1-tablet is-2-mobile is-offset-4-mobile">
+                <div class="select">
+                    <select (change)="OnSelectGender($event)">
+                        <option *ngFor="let gender of genders; let i = index" [ngValue]="gender.gender"  [selected]="gender.gender == 'ALL'">{{ gender.gender }}</option>
+                    </select>
+                </div>
             </div>
+            <div class="column is-1-mobile is-2-tablet  animate_left">
+                <button class="button is-dark is-outlined " (click)="getSearch()" > Search! </button>    
+            </div>
+        </div>
+        <div class="columns">
+                
         </div>
     </div>
 </section>
@@ -40,16 +50,22 @@
                     <div class="modal-background"></div>
                     <div class="modal-card">
                         <header class="modal-card-head">
-                            <p class="modal-card-title">{{ clo.name }} <span class="on_sale is-size-5-desktop" *ngIf="clo.store_price > clo.price ">On Sale!</span></p>
+                            
+                            <p class="modal-card-title">
+                                <a target="_blank" href="{{ clo.url }}">
+                                    {{ clo.name }} <span class="on_sale is-size-5-desktop" *ngIf="clo.store_price > clo.price ">On Sale!</span>
+                                </a>
+                            </p>
                             <button class="delete" aria-label="close" (click)="closeModal( clo.obj_id)"></button>
                         </header>
                         <section class="modal-card-body">
                             <p class="has-text-centered is-size-4">Details</p>
+                            <p><b>ID</b>: {{ clo.obj_id }}</p>
                             <p><b>顏色</b> : {{ clo.color }} </p> 
                             <p><b>其他顏色</b> : <span *ngFor="let color of clo.colors; let i = index">{{ color }} <span *ngIf="i != clo.colors.length - 1">,</span> </span></p>
                             <p><b>Size</b> : <span *ngFor="let size of clo.sizes; let i = index">{{ size }} <span *ngIf="i != clo.sizes.length - 1">,</span> </span></p>
-                            <p><b>{{ clo.price | currency: 'TWD' }}</b> </p>
-                            <s *ngIf="clo.store_price > clo.price">原價 : {{ clo.store_price | currency: 'TWD' }}</s>
+                            <p><b>{{ clo.price | currency : 'TWD' :'symbol' :'3.0-0' }}</b> </p>
+                            <s *ngIf="clo.store_price > clo.price">原價 : {{ clo.store_price | currency : 'TWD' :'symbol' :'3.0-0'}}</s>
                             <p>最近更新 : {{ clo.last_updated | date }}</p>
                             <p class="image is-square">
                                 <img src="{{ clo.img_url }}" alt="{{ clo.name }}">

@@ -49,7 +49,7 @@
     <div class="columns">
       <div class="column is-4 is-offset-4">
         <p class="has-text-centered package-price is-size-4"> 
-         Package Price <span class="has-text-danger">{{ package_price | currency : 'TWD' }}</span>
+         Total Price <span class="has-text-danger">{{ package_price | currency : 'TWD' :'symbol' :'3.0-0' }}</span>
         </p>
       </div>
     </div>

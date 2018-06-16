@@ -21,13 +21,20 @@ export class SearchResultComponent implements OnInit {
   }
 
   query : string = '';
+  genderOption : string = 'ALL';
+  genders = [
+    { 'gender' : 'ALL' },
+    { 'gender' : '男' },
+    { 'gender' : '女' },
+    { 'gender' : '童' }
+  ];
 
   have_result : boolean = false;
 
   queryBody : QueryBody = {
     query : {
-      match : {
-        name : this.query
+      query_string:{
+        query: 'name:' + this.query
       }
     },
     from : 0,
@@ -42,7 +49,8 @@ export class SearchResultComponent implements OnInit {
   clothes : any[] ;
   response : any[];
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient) {
+   }
 
   clc = fromEvent(window, 'scroll')
   .subscribe(e => {
@@ -61,12 +69,15 @@ export class SearchResultComponent implements OnInit {
     let ele = document.getElementById(id);
     ele.classList.remove("is-active");
   }
-
+  
   getSearch = () => {
     if(this.query.length > 0){
       console.log(this.query);
-      this.queryBody.query.match.name = this.query;
-      this.http.post(`http://localhost:5000/search/lativ`, this.queryBody, this.httpOptions)
+      
+      this.queryBody.query.query_string.query = 'name:' + this.query
+      if( !(this.genderOption === 'ALL') )
+        this.queryBody.query.query_string.query += ' AND ' + 'gender:' + this.genderOption;
+      this.http.post(`http://localhost:5000/search`, this.queryBody, this.httpOptions)
       .subscribe(
         (datas:any) => {
           console.log(datas);
@@ -99,11 +110,16 @@ export class SearchResultComponent implements OnInit {
           }
         }
       )
+    }//end of if
+  } // end of getSearch
 
-    }
+  OnSelectGender(event: any){
+    this.genderOption = event.target.value;
   }
 
+
   ngOnInit() {
+    
   }
 
 

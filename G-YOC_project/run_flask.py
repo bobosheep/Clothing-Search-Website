@@ -40,7 +40,7 @@ def search_ALL():
     else:
         return render_template('index.html')
 
-@app.route('/search/<webname>', methods=['POST'])
+@app.route('/search/website/<webname>', methods=['POST'])
 def search_ByWeb(webname='lativ'):
     if request.method == 'POST':
         #data = request.data
@@ -58,9 +58,28 @@ def search_ByWeb(webname='lativ'):
     else:
         return webname
 
+@app.route('/search/category/<category>', methods=['POST'])
+def search_Bycategory(category='ALL'):
+    if request.method == 'POST':
+        #data = request.data
+        #req = json.loads(data)
+        #print(req)
+        res = es.search(index="clothes", body=request.data)
+        #query = req['query']['match']['name']
+        
+        #res = list(db.Lativ.find({'$text':{'$search': query}}, {'score':{'$meta':"textScore"}}))
+        #for i in res:
+            #i['_id'] = str(i['_id'])
+            #print(i)
+        
+        return json.dumps(res)
+    else:
+        return webname
+
+
 @app.errorhandler(404)
 def not_found(error):
     return render_template('error.html'), 404
 
 if __name__ == '__main__':
-    app.run(host="localhost", port="5000", debug=True)
+    app.run(host="127.0.0.1", port="5000", debug=True)

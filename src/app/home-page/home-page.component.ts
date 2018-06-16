@@ -22,10 +22,12 @@ export class HomePageComponent implements OnInit {
     })
   }
 
+  gender: boolean = true;
+
   queryClothes : QueryBody = {
     query : {
       query_string:{
-        query: "category:衣服 AND gender:(男 OR 女)"
+        query: "category:衣服 AND gender:" + (this.gender ? "男" : "女")
       }
     },
     from : Math.floor( Math.random() * 10),
@@ -34,7 +36,7 @@ export class HomePageComponent implements OnInit {
   queryPants : QueryBody = {
     query : {
       query_string:{
-        query: "category:褲裙 AND gender:(男 OR 女)"
+        query: "category:(褲 OR 裙) AND gender:" + (this.gender ? "男" : "女")
       }
     },
     from : Math.floor(Math.random() * 10 ),
@@ -43,7 +45,7 @@ export class HomePageComponent implements OnInit {
   queryShoes : QueryBody = {
     query : {
       query_string:{
-        query: "category:鞋 AND gender:(男 OR 女)"
+        query: "category:鞋 AND gender:" + (this.gender ? "男" : "女")
       }
     },
     from : Math.floor(Math.random() * 10),
@@ -60,9 +62,9 @@ export class HomePageComponent implements OnInit {
   constructor(private http:HttpClient) { }
 
   getRandomMatch = () =>{
-    this.queryClothes.from = Math.floor(Math.random() * 2000);
-    this.queryPants.from = Math.floor(Math.random() * 2000);
-    this.queryShoes.from = Math.floor(Math.random() * 200);
+    this.queryClothes.from = Math.floor(Math.random() * 500);
+    this.queryPants.from = Math.floor(Math.random() * 500);
+    this.queryShoes.from = Math.floor(Math.random() * 20);
     this.package_price = 0;
     console.log('click');
     this.http.post(`http://localhost:5000/search`, this.queryClothes, this.httpOptions)
@@ -106,6 +108,8 @@ export class HomePageComponent implements OnInit {
         }
       }
     )
+
+    this.gender = !this.gender;
   }
 
 

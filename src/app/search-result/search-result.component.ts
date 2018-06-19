@@ -2,6 +2,7 @@ import { Component, OnInit, Query } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { fromEvent } from 'rxjs/observable/fromEvent';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 import { SearchQuery , QueryBody} from '../query';
 import { ClothesData } from '../clothes';
@@ -9,7 +10,19 @@ import { ClothesData } from '../clothes';
 @Component({
   selector: 'app-search-result',
   templateUrl: './search-result.component.html',
-  styleUrls: ['./search-result.component.css']
+  styleUrls: ['./search-result.component.css'],
+  animations:[
+    trigger('HaveAdvance',[
+      state('No',  style({
+        display:'none'
+      })),
+      state('Yes',  style({
+        display:'block'
+      })),
+      transition('No => Yes', animate('100ms ease-in')),
+      transition('Yes => No', animate('100ms ease-out'))
+    ])
+  ]
 })
 
 
@@ -24,12 +37,13 @@ export class SearchResultComponent implements OnInit {
   genderOption : string = 'ALL';
   genders = [
     { 'gender' : 'ALL' },
-    { 'gender' : '男' },
-    { 'gender' : '女' },
-    { 'gender' : '童' }
+    { 'gender' : '男裝' },
+    { 'gender' : '女裝' },
+    { 'gender' : '童裝' }
   ];
 
   have_result : boolean = false;
+  advance_search : string = 'No';
 
   queryBody : QueryBody = {
     query : {
@@ -71,12 +85,12 @@ export class SearchResultComponent implements OnInit {
   }
   
   getSearch = () => {
-    if(this.query.length > 0){
+    if(this.query.length >= 0){
       console.log(this.query);
       
       this.queryBody.query.query_string.query = 'name:' + this.query
       if( !(this.genderOption === 'ALL') )
-        this.queryBody.query.query_string.query += ' AND ' + 'gender:' + this.genderOption;
+        this.queryBody.query.query_string.query += ' AND ' + 'gender:' + this.genderOption[0];
       this.http.post(`http://localhost:5000/search`, this.queryBody, this.httpOptions)
       .subscribe(
         (datas:any) => {

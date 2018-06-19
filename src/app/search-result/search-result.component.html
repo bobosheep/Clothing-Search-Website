@@ -22,9 +22,9 @@
                 <button class="button is-dark is-outlined " (click)="getSearch()" > Search! </button>    
             </div>
         </div>
-        <div class="columns">
-                
-        </div>
+        <button class="button" (click)="advance_search = advance_search==='No' ? 'Yes' : 'No';">click</button>
+        <advance-search [@HaveAdvance]="advance_search" ></advance-search>
+        
     </div>
 </section>
 

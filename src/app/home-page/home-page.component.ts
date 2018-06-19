@@ -2,15 +2,22 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Query } from '@angular/compiler/src/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 import { AppComponent } from '../app.component';
 import { SearchQuery , QueryBody } from '../query' ;
 import { parse } from 'querystring';
 
+
+
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.css']
+  styleUrls: ['./home-page.component.css'],
+
+  animations:[
+       
+  ]
 })
 export class HomePageComponent implements OnInit {
   

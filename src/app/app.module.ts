@@ -4,10 +4,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { SearchResultComponent } from './search-result/search-result.component';
+import { AdvanceSearchComponent } from './search-result/advance-search.component';
 
 const appRoutes: Routes = [
   { path: 'search', component: SearchResultComponent},
@@ -22,6 +24,7 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     HomePageComponent,
+    AdvanceSearchComponent,
     SearchResultComponent
   ],
   imports: [
@@ -31,7 +34,8 @@ const appRoutes: Routes = [
       { enableTracing: true } // <-- debugging purposes only
     ),
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

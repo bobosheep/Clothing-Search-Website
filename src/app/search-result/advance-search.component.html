@@ -1,0 +1,32 @@
+<div class="columns">
+    <div class="column" id="website">
+        <label class="checkbox">
+        <div *ngFor="let web of checkboxs.websites">
+            <input type="checkbox" > {{ web }}
+        </div>
+        </label>
+    </div>
+    <div class="column" id="category">
+        <label class="checkbox">
+            <div *ngFor="let category of checkboxs.categorys">
+                <input type="checkbox" > {{ category }}
+            </div>
+        </label>
+    </div>
+    <div class="column" id="color">
+        <label class="checkbox">
+            <div *ngFor="let color of checkboxs.colors">
+                <input type="checkbox" > {{ color }}
+            </div>          
+        </label>
+    </div>
+    <div class="column" id="size">
+        <label class="checkbox">
+            <div *ngFor="let size of checkboxs.sizes">
+                <input type="checkbox"> {{ size }}
+            </div>          
+        </label>
+    </div>
+    <div class="column" id="price">
+    </div>
+</div>

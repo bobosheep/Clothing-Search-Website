@@ -1,5 +1,4 @@
 import { Component, OnInit, Query} from '@angular/core';
-import { NgModule } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 
 
@@ -7,7 +6,10 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 @Component({
     selector: 'advance-search',
     templateUrl: 'advance-search.component.html',
-    styles: [],
+    styles: [`label{
+      margin-left: 5px;
+      margin-right: 5px;
+    }`],
     animations:[
       trigger('HaveAdvance',[
         state('No',  style({
@@ -37,31 +39,31 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
       this.priceOption = event.target.value
     }
     toggleWeb(name:string){
-      let idx = this.advanceChoose.webs.indexOf(name);
+      let idx = this.advanceChoose.site.indexOf(name);
       if(idx > -1){
-        this.advanceChoose.webs.splice(idx, 1);
+        this.advanceChoose.site.splice(idx, 1);
       }
       else{
-        this.advanceChoose.webs.push(name);
+        this.advanceChoose.site.push(name);
       }
     }
     toggleCategory(name:string){
-      let idx = this.advanceChoose.categorys.indexOf(name);
+      let idx = this.advanceChoose.category.indexOf(name);
       if(idx > -1){
-        this.advanceChoose.categorys.splice(idx, 1);
+        this.advanceChoose.category.splice(idx, 1);
       }
       else{
-        this.advanceChoose.categorys.push(name);
+        this.advanceChoose.category.push(name);
       }
       console.log(this.advanceChoose);
     }
     toggleColors(color:string){
-      let idx = this.advanceChoose.colors.indexOf(color);
+      let idx = this.advanceChoose.color.indexOf(color);
       if(idx > -1){
-        this.advanceChoose.colors.splice(idx, 1);
+        this.advanceChoose.color.splice(idx, 1);
       }
       else{
-        this.advanceChoose.colors.push(color);
+        this.advanceChoose.color.push(color);
       }
     }
     toggleSizes(size:string){
@@ -86,12 +88,10 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
         prices:['Default','200以下','200~500','500以上']
       }
       this.advanceChoose = {
-        webs:[],
-        categorys:[],
-        colors:[],
-        sizes:[],
-        priceLow:0,
-        priceHigh:500,
+        site:[],
+        category:[],
+        color:[],
+        sizes:[]
       }
     }
   }

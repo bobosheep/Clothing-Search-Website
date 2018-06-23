@@ -2,17 +2,17 @@ from flask import Flask , send_from_directory
 from flask import request
 from flask import render_template
 from elasticsearch import Elasticsearch
-from pymongo.errors import BulkWriteError
-from pymongo import MongoClient
+#from pymongo.errors import BulkWriteError
+#from pymongo import MongoClient
 
 import time
-import pymongo
+#import pymongo
 import json
 es = Elasticsearch()
 app = Flask(__name__, static_url_path='')
 
-client = MongoClient('localhost', 27017)
-db = client.Clothes
+#client = MongoClient('localhost', 27017)
+#db = client.Clothes
 
 
 
@@ -56,7 +56,7 @@ def search_ByWeb(webname='lativ'):
         
         return json.dumps(res)
     else:
-        return webname
+        return
 
 @app.route('/search/category/<category>', methods=['POST'])
 def search_Bycategory(category='ALL'):
@@ -82,4 +82,5 @@ def not_found(error):
     return render_template('error.html'), 404
 
 if __name__ == '__main__':
-    app.run(host="127.0.0.1", port="5000", debug=True)
+    #app.run(host="127.0.0.1", port="5000", debug=True)
+    app.run(host="0.0.0.0", port="5100", debug=True)

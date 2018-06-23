@@ -4,6 +4,7 @@ export class SearchQuery {
 
 export class QueryBody{
     query: any;
+    sort: any;
     from: number;
     size: number;
 

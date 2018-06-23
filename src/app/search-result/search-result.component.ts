@@ -7,6 +7,8 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 import { SearchQuery , QueryBody} from '../query';
 import { ClothesData } from '../clothes';
 import { AdvanceSearchComponent } from './advance-search.component'
+import { log } from 'util';
+import { shouldCallLifecycleInitHook } from '@angular/core/src/view';
 
 @Component({
   selector: 'app-search-result',
@@ -28,6 +30,9 @@ import { AdvanceSearchComponent } from './advance-search.component'
 
 
 export class SearchResultComponent implements OnInit {
+
+  @ViewChild(AdvanceSearchComponent) advanceSearch;
+
   httpOptions = {
     headers: new HttpHeaders({
       'Access-Control-Allow-Origin':'*'
@@ -38,22 +43,33 @@ export class SearchResultComponent implements OnInit {
   genderOption : string = 'ALL';
   genders = [
     { 'gender' : 'ALL' },
-    { 'gender' : '男裝' },
-    { 'gender' : '女裝' },
-    { 'gender' : '童裝' }
+    { 'gender' : '男' },
+    { 'gender' : '女' },
+    { 'gender' : '童' }
   ];
 
   have_result : boolean = false;
   advance_search : string = 'No';
 
-  queryBody : QueryBody = {
+  queryBody = {
     query : {
-      query_string:{
-        query: 'name:' + this.query
+      bool: {
+          must: [],       //{ match: { name: "" }},{ match : { website:""}}...
+          should: [],     //{ match: { name: "" }}
+          filter: {
+            bool: { 
+                must: []  //{ match : { gender :  "" }}}
+            }
+          }
+      }
+    },
+    sort: { 
+      last_updated: {
+        order: 'desc' 
       }
     },
     from : 0,
-    size : 20
+    size : 30
   }
 
   result: any = {
@@ -85,14 +101,36 @@ export class SearchResultComponent implements OnInit {
     ele.classList.remove("is-active");
   }
   
+
+
   getSearch = () => {
     if(this.query.length >= 0){
       console.log(this.query);
       
-      this.queryBody.query.query_string.query = 'name:' + this.query
+      let matcharr:any[] = [];
+      let gender: any[] = [{match:{gender:  this.genderOption}}];
+
+      if(this.advance_search === 'Yes'){
+        for (let i in this.advanceSearch.advanceChoose){
+          for(let j in this.advanceSearch.advanceChoose[i]){
+            let idx = this.advanceSearch.advanceChoose[i];
+            let match = new Object();
+            match["term"] = {}
+            match["term"][i] = idx[j];
+            matcharr.push(match);
+            //this.queryBody.query.bool.should.push(match)
+          }
+        }
+        this.queryBody.query.bool.should = matcharr;
+      }
+
+      //this.queryBody.query.query_string.query = 'name:' + this.query
       if( !(this.genderOption === 'ALL') )
-        this.queryBody.query.query_string.query += ' AND ' + 'gender:' + this.genderOption[0];
-      this.http.post(`http://localhost:5000/search`, this.queryBody, this.httpOptions)
+        this.queryBody.query.bool.filter.bool.must = gender;
+
+      console.log(this.queryBody);
+
+      this.http.post(`http://localhost:5100/search`, this.queryBody, this.httpOptions)
       .subscribe(
         (datas:any) => {
           console.log(datas);
@@ -125,7 +163,7 @@ export class SearchResultComponent implements OnInit {
           }
         }
       )
-    }//end of if
+    }//end of if query.length() >= 0
   } // end of getSearch
 
   OnSelectGender(event: any){
@@ -133,7 +171,6 @@ export class SearchResultComponent implements OnInit {
   }
 
 
-  @ViewChild(AdvanceSearchComponent) advanceSearch;
 
   showAdvance(){
     console.log(this.advanceSearch.advanceChoose);

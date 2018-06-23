@@ -31,7 +31,7 @@ export class HomePageComponent implements OnInit {
 
   gender: boolean = true;
 
-  queryClothes : QueryBody = {
+  queryClothes = {
     query : {
       query_string:{
         query: "category:衣服 AND gender:" + (this.gender ? "男" : "女")
@@ -40,7 +40,7 @@ export class HomePageComponent implements OnInit {
     from : Math.floor( Math.random() * 10),
     size : 1
   }
-  queryPants : QueryBody = {
+  queryPants  = {
     query : {
       query_string:{
         query: "category:(褲 AND 裙) AND gender:" + (this.gender ? "男" : "女")
@@ -49,7 +49,7 @@ export class HomePageComponent implements OnInit {
     from : Math.floor(Math.random() * 10 ),
     size : 1
   }
-  queryShoes : QueryBody = {
+  queryShoes = {
     query : {
       query_string:{
         query: "category:鞋 AND gender:" + (this.gender ? "男" : "女")
@@ -86,7 +86,7 @@ export class HomePageComponent implements OnInit {
     this.queryShoes.from = Math.floor(Math.random() * 20);
     this.package_price = 0;
     console.log('click');
-    this.http.post(`http://localhost:5000/search`, this.queryClothes, this.httpOptions)
+    this.http.post(`http://localhost:5100/search`, this.queryClothes, this.httpOptions)
     .subscribe(
       (datas:any) =>{
         let data = datas.hits.hits;
@@ -100,7 +100,7 @@ export class HomePageComponent implements OnInit {
       }
     )
 
-    this.http.post(`http://localhost:5000/search`, this.queryPants, this.httpOptions)
+    this.http.post(`http://localhost:5100/search`, this.queryPants, this.httpOptions)
     .subscribe(
       (datas:any) =>{
         let data = datas.hits.hits;
@@ -114,7 +114,7 @@ export class HomePageComponent implements OnInit {
       }
     )
 
-    this.http.post(`http://localhost:5000/search`, this.queryShoes, this.httpOptions)
+    this.http.post(`http://localhost:5100/search`, this.queryShoes, this.httpOptions)
     .subscribe(
       (datas:any) =>{
         let data = datas.hits.hits;

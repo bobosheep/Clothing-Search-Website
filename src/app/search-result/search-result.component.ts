@@ -108,26 +108,30 @@ export class SearchResultComponent implements OnInit {
       console.log(this.query);
       
       let matcharr:any[] = [];
-      let gender: any[] = [{match:{gender:  this.genderOption}}];
+      let gender = {term:{gender:  this.genderOption}};
 
       if(this.advance_search === 'Yes'){
         for (let i in this.advanceSearch.advanceChoose){
+          let bool_should = new Object();
+          bool_should["bool"] = { should : []};
           for(let j in this.advanceSearch.advanceChoose[i]){
             let idx = this.advanceSearch.advanceChoose[i];
             let match = new Object();
-            match["term"] = {}
+            match["term"] = {};
             match["term"][i] = idx[j];
-            matcharr.push(match);
+            bool_should["bool"]["should"].push(match);
             //this.queryBody.query.bool.should.push(match)
           }
+          if(bool_should["bool"]["should"].length > 0)
+            matcharr.push(bool_should);
         }
-        this.queryBody.query.bool.should = matcharr;
       }
 
       //this.queryBody.query.query_string.query = 'name:' + this.query
       if( !(this.genderOption === 'ALL') )
-        this.queryBody.query.bool.filter.bool.must = gender;
-
+        matcharr.push(gender);
+      
+      this.queryBody.query.bool.must = matcharr;
       console.log(this.queryBody);
 
       this.http.post(`http://localhost:5100/search`, this.queryBody, this.httpOptions)

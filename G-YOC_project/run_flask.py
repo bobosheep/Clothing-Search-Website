@@ -74,7 +74,7 @@ def search_Bycategory(category='ALL'):
         
         return json.dumps(res)
     else:
-        return webname
+        return category
 
 
 @app.errorhandler(404)

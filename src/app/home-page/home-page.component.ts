@@ -43,7 +43,7 @@ export class HomePageComponent implements OnInit {
   queryPants : QueryBody = {
     query : {
       query_string:{
-        query: "category:(褲 OR 裙) AND gender:" + (this.gender ? "男" : "女")
+        query: "category:(褲 AND 裙) AND gender:" + (this.gender ? "男" : "女")
       }
     },
     from : Math.floor(Math.random() * 10 ),
@@ -61,9 +61,21 @@ export class HomePageComponent implements OnInit {
 
   
 
-  resClothes : any;
-  resPants : any;
-  resShoes : any;
+  resClothes : any ={
+    url:'',
+    img_url:'',
+    price:''
+  };
+  resPants : any ={
+    url:'',
+    img_url:'',
+    price:''
+  };
+  resShoes : any ={
+    url:'',
+    img_url:'',
+    price:''
+  };
   package_price : number = 0;
 
   constructor(private http:HttpClient) { }
@@ -117,6 +129,7 @@ export class HomePageComponent implements OnInit {
     )
 
     this.gender = !this.gender;
+    console.log(this.gender);
   }
 
 

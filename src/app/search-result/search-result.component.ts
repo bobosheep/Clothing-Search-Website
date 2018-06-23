@@ -1,11 +1,12 @@
-import { Component, OnInit, Query } from '@angular/core';
+import { Component, OnInit, Query, ViewChild } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
-import { fromEvent } from 'rxjs/observable/fromEvent';
+import { fromEvent } from 'rxjs';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 
 import { SearchQuery , QueryBody} from '../query';
 import { ClothesData } from '../clothes';
+import { AdvanceSearchComponent } from './advance-search.component'
 
 @Component({
   selector: 'app-search-result',
@@ -131,6 +132,12 @@ export class SearchResultComponent implements OnInit {
     this.genderOption = event.target.value;
   }
 
+
+  @ViewChild(AdvanceSearchComponent) advanceSearch;
+
+  showAdvance(){
+    console.log(this.advanceSearch.advanceChoose);
+  }
 
   ngOnInit() {
     

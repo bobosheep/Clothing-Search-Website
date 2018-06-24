@@ -39,7 +39,7 @@ def search_ALL():
         return json.dumps(res)
     else:
         return render_template('index.html')
-
+"""
 @app.route('/search/website/<webname>', methods=['POST'])
 def search_ByWeb(webname='lativ'):
     if request.method == 'POST':
@@ -75,7 +75,7 @@ def search_Bycategory(category='ALL'):
         return json.dumps(res)
     else:
         return category
-
+"""
 
 @app.errorhandler(404)
 def not_found(error):

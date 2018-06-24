@@ -1,4 +1,10 @@
 
+
+.advance-button{
+    position:absolute;
+    top: 131px; 
+    left:35vw;
+}
 @media (min-width : 769px){
     .animate_left{
         position: relative;
@@ -9,8 +15,19 @@
         width: 70%;
         margin-left: 15%;
     }
+    .advance-button{
+        position:absolute;
+        top: 6vh; 
+        left:35vw;
+    }
 }
-
+@media (min-width : 1108px){
+    .advance-button{
+        position:absolute;
+        top: 6vh; 
+        left: 30vw;
+    }
+}
 
 .on_sale{
     color: rgb(238, 235, 80);
@@ -33,3 +50,4 @@
 .clothes_name:hover{
     color: rgb(87, 97, 212);
 }
+

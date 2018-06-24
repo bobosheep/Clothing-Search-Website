@@ -1,27 +1,31 @@
 <div class="columns">
-    <div class="column" id="website" style="">
+    <div class="column" id="website" >
+        <p> Website: </p>
         <label class="checkbox" *ngFor="let web of checkboxs.websites">
             <input type="checkbox" (click)="toggleWeb(web)"> {{ web }}
         </label>
     </div>
     <div class="column" id="category">
+        <p> Category: </p>
         <label class="checkbox" *ngFor="let category of checkboxs.categorys">
             <input type="checkbox" (click)="toggleCategory(category)"> {{ category }}
         </label>
     </div>
     <div class="column" id="color">
+        <p> Colors: </p>
         <label class="checkbox" *ngFor="let color of checkboxs.colors">
             <input type="checkbox" (click)="toggleColors(color)" > {{ color }}
         </label>
     </div>
     <div class="column" id="size">
+        <p> Sizes: </p>
         <label class="checkbox"  *ngFor="let size of checkboxs.sizes">
             <input type="checkbox" (click)="toggleSizes(size)"> {{ size }}
         </label>
     </div>
-    <div class="column" id="price">
+    <!-- class="column" id="price">
         <select (change)="OnSelectPrice($event)">
             <option *ngFor="let price of priceSelect.prices; let i = index" [ngValue]="price" [selected]="price == 'Default'">{{ price }}</option>
         </select>
-    </div>
+    </d-->
 </div>

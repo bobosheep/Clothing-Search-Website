@@ -22,3 +22,19 @@
     100%{color:rgba(241, 238, 42, 0.979);}
     
 }
+
+.go-top-icon{
+    cursor: pointer;
+    display: inline;
+    position: fixed;
+    bottom : 100px;
+    right : 50px;
+}
+@media (max-width : 768px){
+    .go-top-icon{
+        display: inline;
+        position: fixed;
+        bottom : 20px;
+        right : 20px;
+    }
+}

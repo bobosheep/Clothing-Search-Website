@@ -9,19 +9,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
     styles: [`label{
       margin-left: 5px;
       margin-right: 5px;
-    }`],
-    animations:[
-      trigger('HaveAdvance',[
-        state('No',  style({
-          display:'none'
-        })),
-        state('Yes',  style({
-          display:'block'
-        })),
-        transition('No => Yes', animate('100ms ease-in')),
-        transition('Yes => No', animate('100ms ease-out'))
-      ])
-    ]
+    }`]
   })
   
   export class AdvanceSearchComponent  implements OnInit {
@@ -78,10 +66,10 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 
     ngOnInit(){
       this.checkboxs = {
-        websites: ['Lativ', '50%', 'Uniqlo'],
-        categorys: ['上衣', '外套', '褲裙', '內衣', '內褲', '鞋子', '配件'],
+        websites: ['lativ', 'fiftypercent'],
+        categorys: ['衣服', '外套', '褲裙', '內衣', '內褲', '鞋', '配件'],
         colors: ['紅','黃', '綠', '藍','粉','紫','灰','白', '黑'],
-        sizes: ['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL']
+        sizes: ['XS', 'S', 'M', 'L', 'XL']
   
       }
       this.priceSelect = {

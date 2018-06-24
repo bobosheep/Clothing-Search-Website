@@ -20,6 +20,13 @@
   </div>
 </section>
 
+<div class="tabs is-centered">
+  <ul>
+    <li [ngClass]="Women" (click)="gender = 'Women';Women = 'is-active'; Men = ''; getRandomMatch()"><a>Women</a></li>
+    <li [ngClass]="Men"(click)="gender = 'Men'; Women = '' ; Men = 'is-active'; getRandomMatch()" ><a>Men</a></li>
+  </ul>
+</div>
+
 <section class="section" >
   <div class="container">
     <div class="columns">
@@ -31,14 +38,14 @@
         </figure>
       </div>
       <div class="column">
-        <figure class="image is-256x256">
+        <figure class="image is-256x256" >
           <a target="_blank" href="{{ resPants.url }}">
             <img src="{{ resPants.img_url }}">
           </a>
         </figure>
       </div>
       <div class="column">
-        <figure class="image is-256x256" >
+        <figure class="image is-256x256">
             <a target="_blank" href="{{ resShoes.url }}">
               <img src="{{ resShoes.img_url }}">
             </a>

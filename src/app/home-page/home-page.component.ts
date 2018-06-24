@@ -16,7 +16,7 @@ import { parse } from 'querystring';
   styleUrls: ['./home-page.component.css'],
 
   animations:[
-       
+      
   ]
 })
 export class HomePageComponent implements OnInit {
@@ -29,12 +29,18 @@ export class HomePageComponent implements OnInit {
     })
   }
 
-  gender: boolean = true;
+  gender: string = 'Women';
+  Women: string = 'is-active';
+  Men: string = '';
+
+  clothesquerystring: string="category:衣服 AND gender:";
+  pantsquerystring: string="category:(褲 AND 裙) AND gender:";
+  shoesquerystring: string="category:鞋 AND gender:";
 
   queryClothes = {
     query : {
       query_string:{
-        query: "category:衣服 AND gender:" + (this.gender ? "男" : "女")
+        query: ""
       }
     },
     from : Math.floor( Math.random() * 10),
@@ -43,7 +49,7 @@ export class HomePageComponent implements OnInit {
   queryPants  = {
     query : {
       query_string:{
-        query: "category:(褲 AND 裙) AND gender:" + (this.gender ? "男" : "女")
+        query: ""
       }
     },
     from : Math.floor(Math.random() * 10 ),
@@ -52,7 +58,7 @@ export class HomePageComponent implements OnInit {
   queryShoes = {
     query : {
       query_string:{
-        query: "category:鞋 AND gender:" + (this.gender ? "男" : "女")
+        query: ""
       }
     },
     from : Math.floor(Math.random() * 10),
@@ -81,11 +87,17 @@ export class HomePageComponent implements OnInit {
   constructor(private http:HttpClient) { }
 
   getRandomMatch = () =>{
-    this.queryClothes.from = Math.floor(Math.random() * 500);
-    this.queryPants.from = Math.floor(Math.random() * 500);
+    this.queryClothes.from = Math.floor(Math.random() * 100);
+    this.queryPants.from = Math.floor(Math.random() * 100);
     this.queryShoes.from = Math.floor(Math.random() * 20);
     this.package_price = 0;
-    console.log('click');
+
+    let womenOrmen:string = (this.gender === 'Women' ? '女' : '男');
+
+    this.queryClothes.query.query_string.query = this.clothesquerystring + womenOrmen;
+    this.queryPants.query.query_string.query = this.pantsquerystring + womenOrmen;
+    this.queryShoes.query.query_string.query = this.shoesquerystring + womenOrmen;
+
     this.http.post(`http://localhost:5100/search`, this.queryClothes, this.httpOptions)
     .subscribe(
       (datas:any) =>{
@@ -128,8 +140,6 @@ export class HomePageComponent implements OnInit {
       }
     )
 
-    this.gender = !this.gender;
-    console.log(this.gender);
   }
 
 

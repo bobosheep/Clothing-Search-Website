@@ -38,3 +38,12 @@
     67% {opacity: 0; padding-left: 50px;}
     100% {opacity: 1; padding-left: 0px;}
 }
+
+
+@media (max-width : 768px){
+    .image.is-256x256{
+        max-width: 256px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

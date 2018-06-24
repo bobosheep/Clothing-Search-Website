@@ -1,4 +1,4 @@
-<section class="section">
+<section class="section" id="searchTop">
     <div class="container"> 
         <div class="columns ">
             <div class="column is-1-tablet is-offset-1-tablet is-hidden-mobile">
@@ -6,12 +6,12 @@
                     <div class="image is-64x64 "><img src="../../assets/G-YOC.png" alt="Logo"></div>
                 </div>
             </div>
-            <div class="column is-7-tablet is-12-mobile ">
+            <div class="column is-6-tablet is-12-mobile ">
                 <div class="control">
                     <input [(ngModel)]="query" (keyup.enter)="getSearch()" class="input is-rounded " type="text" placeholder="What clothing you want in {{ genderOption }}">
                 </div>
             </div>
-            <div class="column is-1-tablet is-2-mobile is-offset-4-mobile">
+            <div class="column is-2-tablet is-4-mobile is-offset-4-mobile">
                 <div class="select">
                     <select (change)="OnSelectGender($event)">
                         <option *ngFor="let gender of genders; let i = index" [ngValue]="gender.gender"  [selected]="gender.gender == 'ALL'">{{ gender.gender }}</option>
@@ -19,56 +19,57 @@
                 </div>
             </div>
             <div class="column is-1-mobile is-2-tablet  animate_left">
-                <button class="button is-dark is-outlined " (click)="getSearch()" > Search! </button>    
+                <button class="button is-dark is-outlined " (click)="nowpage = 1; getSearch()" > Search! </button>    
             </div>
         </div>
-        <advance-search [@HaveAdvance]="advance_search" (click)="showAdvance()"></advance-search>
-        <button class="button" (click)="advance_search = advance_search==='No' ? 'Yes' : 'No'; " > More Option</button>
-        
+        <div [@HaveAdvance]="advance_search" (click)="showAdvance()">
+            <advance-search ></advance-search>
+        </div>
+        <button class="button advance-button" (click)="advance_search = advance_search==='No' ? 'Yes' : 'No'; " > More Option</button>
+
         
     </div>
 </section>
 
 <!--顯示結果-->
-
-<section class="section" *ngIf="have_result">
-    <div class="container">
-        <div class="columns">
-            <div class="column is-3 is-offset-3 has-text-centered">    
-                <span> Search Time : {{ result.took_time }} ms</span>
-            </div>
-            <div class="column is-3 has-text-centered">    
-                <span> Search Result : {{ result.hits_total }} </span>
-            </div>
-        </div>
-
+<div class="tabs is-centered">
+    <ul>
+        <li [ngClass]="sortIsActive.default" (click)="chooseSort('default');getSearch()"><a>Default</a></li>
+        <li [ngClass]="sortIsActive.priceAsc" (click)="chooseSort('price asc');getSearch()"><a>價格↑</a></li>
+        <li [ngClass]="sortIsActive.priceDesc"(click)="chooseSort('price desc');getSearch()" ><a>價格↓</a></li>
+    </ul>
+</div>
+<section class="section" >
+    <div *ngIf="!have_result"  style="padding-left: 20vw;">
+        <img src="http://bespokedigitalmedia.in/images/result-not-found-1.png" alt="No result" style="width: 60vw; max-width: 859px;">
+    </div>
+    <div class="container" *ngIf="have_result">
         <div class="columns is-multiline">
             <div class="column is-3-desktop is-3-tablet is-3-fullhd" *ngFor="let clo of clothes; let i = index">
                 <a target="_blank" class="image is-256x256" (click)="launchModal( clo.obj_id)" >
                     <img src="{{ clo.img_url }}" alt="{{ clo.name }}">
                 </a>
                 <div class="modal" [ngClass]="" id="{{ clo.obj_id }}">
-                    <div class="modal-background"></div>
+                    <div class="modal-background" (click) = "closeModal(clo.obj_id)"></div>
                     <div class="modal-card">
                         <header class="modal-card-head">
                             
-                            <p class="modal-card-title">
+                            <p class="modal-card-title"> Details</p>
+                            <button class="delete" aria-label="close" (click)="closeModal( clo.obj_id)"></button>
+                        </header>
+                        <section class="modal-card-body">
+                            <p>
                                 <a target="_blank" href="{{ clo.url }}">
                                     {{ clo.name }} <span class="on_sale is-size-5-desktop" *ngIf="clo.store_price > clo.price ">On Sale!</span>
                                 </a>
                             </p>
-                            <button class="delete" aria-label="close" (click)="closeModal( clo.obj_id)"></button>
-                        </header>
-                        <section class="modal-card-body">
-                            <p class="has-text-centered is-size-4">Details</p>
-                            <p><b>ID</b>: {{ clo.obj_id }}</p>
                             <p><b>顏色</b> : {{ clo.color }} </p> 
                             <p><b>其他顏色</b> : <span *ngFor="let color of clo.colors; let i = index">{{ color }} <span *ngIf="i != clo.colors.length - 1">,</span> </span></p>
                             <p><b>Size</b> : <span *ngFor="let size of clo.sizes; let i = index">{{ size }} <span *ngIf="i != clo.sizes.length - 1">,</span> </span></p>
                             <p><b>{{ clo.price | currency : 'TWD' :'symbol' :'3.0-0' }}</b> </p>
                             <s *ngIf="clo.store_price > clo.price">原價 : {{ clo.store_price | currency : 'TWD' :'symbol' :'3.0-0'}}</s>
                             <p>最近更新 : {{ clo.last_updated | date }}</p>
-                            <p class="image is-square">
+                            <p class="image">
                                 <img src="{{ clo.img_url }}" alt="{{ clo.name }}">
                             </p>
                             
@@ -91,42 +92,21 @@
                 </div>
             </div>
         </div>
-        <!--article class="media w-fix " *ngFor="let clo of clothes; let i = index">
-            <figure class="media-left">
-                <a target="_blank" class="image is-256x256" (click)="launchModal( clo.obj_id)">
-                        <img src="{{ clo.img_url }}" alt="{{ clo.name }}">
-                </a>
-            </figure>
-            <div class="modal" [ngClass]="" id="{{ clo.obj_id }}">
-                <div class="modal-background"></div>
-                    <div class="modal-content">
-                        <p class="image is-square">
-                        <img src="{{ clo.img_url }}" alt="{{ clo.name }}">
-                        </p>
-                    </div>  
-                <button class="modal-close is-large" aria-label="close" (click)="closeModal( clo.obj_id)"></button>
-            </div>
-            <div class="media-content">
-                <div class="content">
-                    <a target="_blank" href="{{ clo.url }}"><h2 class="title clothes_name">{{ clo.name }} - {{ clo.gender }}</h2></a>
-                    <p><b>顏色</b> : {{ clo.color }} </p> 
-                    <p><b>其他顏色</b> : <span *ngFor="let color of clo.colors; let i = index">{{ color }} <span *ngIf="i != clo.colors.length - 1">,</span> </span></p>
-                    <p><b>Size</b> : <span *ngFor="let size of clo.sizes; let i = index">{{ size }} <span *ngIf="i != clo.sizes.length - 1">,</span> </span></p>
-                    <span class="on_sale" *ngIf="clo.store_price > clo.price">On Sale!</span>
-                    <p><b>{{ clo.price | currency: 'TWD' }}</b> </p>
-                    <s *ngIf="clo.store_price > clo.price">原價 : {{ clo.store_price | currency: 'TWD' }}</s>
-                    <p>最近更新 : {{ clo.last_updated | date }}</p>
-                </div>
-                
-            </div>
-            <!--div class="media-right">
-                <a class="level-item">
-                    <span class="icon has-text-danger"><i class="fas fa-heart"></i></span>
-                </a>
-            </div>
-            
-        </article-->
     </div>
+    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+        <a class="pagination-previous" (click)="nowpage = nowpage > 1 ? nowpage - 1 : 1; getSearch()">Previous</a>
+        <a class="pagination-next" (click)="nowpage =  nowpage + 1; getSearch()">Next page</a>
+        <ul class="pagination-list">
+            <li *ngFor="let pageinfo of pages" ><a class="pagination-link" [ngClass]="pageinfo.iscurrentpage" (click)="nowpage = pageinfo.page; getSearch()">{{ pageinfo.page }}</a></li>
+            <!--li><a class="pagination-link" aria-label="Goto page 1">1</a></li>
+            <li><span class="pagination-ellipsis">&hellip;</span></li>
+            <li><a class="pagination-link" aria-label="Goto page 45">45</a></li>
+            <li><a class="pagination-link is-current" aria-label="Page 46" aria-current="page">46</a></li>
+            <li><a class="pagination-link" aria-label="Goto page 47">47</a></li>
+            <li><span class="pagination-ellipsis">&hellip;</span></li>
+            <li><a class="pagination-link" aria-label="Goto page 86">86</a></li-->
+        </ul>
+      </nav>
 </section>
 
 

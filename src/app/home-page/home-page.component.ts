@@ -98,7 +98,7 @@ export class HomePageComponent implements OnInit {
     this.queryPants.query.query_string.query = this.pantsquerystring + womenOrmen;
     this.queryShoes.query.query_string.query = this.shoesquerystring + womenOrmen;
 
-    this.http.post(`http://localhost:5100/search`, this.queryClothes, this.httpOptions)
+    this.http.post(`/search`, this.queryClothes) //this.http.post(`http://localhost:5100/search`, this.queryClothes, this.httpOptions)
     .subscribe(
       (datas:any) =>{
         let data = datas.hits.hits;
@@ -112,7 +112,7 @@ export class HomePageComponent implements OnInit {
       }
     )
 
-    this.http.post(`http://localhost:5100/search`, this.queryPants, this.httpOptions)
+    this.http.post(`/search`, this.queryPants)
     .subscribe(
       (datas:any) =>{
         let data = datas.hits.hits;
@@ -126,7 +126,7 @@ export class HomePageComponent implements OnInit {
       }
     )
 
-    this.http.post(`http://localhost:5100/search`, this.queryShoes, this.httpOptions)
+    this.http.post(`/search`, this.queryShoes)
     .subscribe(
       (datas:any) =>{
         let data = datas.hits.hits;

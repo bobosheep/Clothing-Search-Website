@@ -11,6 +11,7 @@ import json
 es = Elasticsearch()
 app = Flask(__name__, static_url_path='')
 
+
 #client = MongoClient('localhost', 27017)
 #db = client.Clothes
 
@@ -83,4 +84,4 @@ def not_found(error):
 
 if __name__ == '__main__':
     #app.run(host="127.0.0.1", port="5000", debug=True)
-    app.run(host="0.0.0.0", port="5100", debug=True)
+    app.run(host="0.0.0.0", port="5100", debug=False)

@@ -303,7 +303,7 @@ var HomePageComponent = /** @class */ (function () {
             _this.queryClothes.query.query_string.query = _this.clothesquerystring + womenOrmen;
             _this.queryPants.query.query_string.query = _this.pantsquerystring + womenOrmen;
             _this.queryShoes.query.query_string.query = _this.shoesquerystring + womenOrmen;
-            _this.http.post("http://localhost:5100/search", _this.queryClothes, _this.httpOptions)
+            _this.http.post("/search", _this.queryClothes)
                 .subscribe(function (datas) {
                 var data = datas.hits.hits;
                 //console.log(data);
@@ -314,7 +314,7 @@ var HomePageComponent = /** @class */ (function () {
                     //console.log(this.resClothes);
                 }
             });
-            _this.http.post("http://localhost:5100/search", _this.queryPants, _this.httpOptions)
+            _this.http.post("/search", _this.queryPants)
                 .subscribe(function (datas) {
                 var data = datas.hits.hits;
                 //console.log(data);
@@ -325,7 +325,7 @@ var HomePageComponent = /** @class */ (function () {
                     //console.log(this.resClothes);
                 }
             });
-            _this.http.post("http://localhost:5100/search", _this.queryShoes, _this.httpOptions)
+            _this.http.post("/search", _this.queryShoes)
                 .subscribe(function (datas) {
                 var data = datas.hits.hits;
                 //console.log(data);
@@ -692,7 +692,7 @@ var SearchResultComponent = /** @class */ (function () {
                     sort: sortOption
                 };
                 console.log(queryBody);
-                _this.http.post("http://localhost:5100/search", queryBody, _this.httpOptions)
+                _this.http.post("/search", queryBody)
                     .subscribe(function (datas) {
                     console.log(datas);
                     _this.response = datas.hits.hits;

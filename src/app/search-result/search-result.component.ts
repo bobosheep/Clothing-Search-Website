@@ -241,7 +241,7 @@ export class SearchResultComponent implements OnInit {
 
 
 
-      this.http.post(`http://localhost:5100/search`, queryBody, this.httpOptions)
+      this.http.post(`/search`, queryBody)   //this.http.post(`http://localhost:5100/search`, this.queryClothes, this.httpOptions)
       .subscribe(
         (datas:any) => {
           console.log(datas);

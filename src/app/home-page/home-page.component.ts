@@ -88,7 +88,7 @@ export class HomePageComponent implements OnInit {
 
   getRandomMatch = () =>{
     this.queryClothes.from = Math.floor(Math.random() * 100);
-    this.queryPants.from = Math.floor(Math.random() * 100);
+    this.queryPants.from = Math.floor(Math.random() * 50);
     this.queryShoes.from = Math.floor(Math.random() * 20);
     this.package_price = 0;
 
@@ -106,7 +106,6 @@ export class HomePageComponent implements OnInit {
         if(data.length > 0){
           this.resClothes = data[0]._source;
           this.resClothes.price = parseInt(this.resClothes.price)
-          this.package_price += this.resClothes.price;
           //console.log(this.resClothes);
         }
       }
@@ -120,7 +119,6 @@ export class HomePageComponent implements OnInit {
         if(data.length > 0){
           this.resPants = data[0]._source;
           this.resPants.price = parseInt(this.resPants.price)
-          this.package_price += this.resPants.price;
           //console.log(this.resClothes);
         }
       }
@@ -134,17 +132,25 @@ export class HomePageComponent implements OnInit {
         if(data.length > 0){
           this.resShoes = data[0]._source;
           this.resShoes.price = parseInt(this.resShoes.price)
-          this.package_price += this.resShoes.price;
           //console.log(this.resClothes);
         }
       }
     )
+
+    
+    this.package_price += this.resClothes.price;
+    this.package_price += this.resPants.price;
+    this.package_price += this.resShoes.price;
 
   }
 
 
   ngOnInit() {
     this.getRandomMatch();
+    this.package_price = 0;
+    this.package_price += this.resClothes.price;
+    this.package_price += this.resPants.price;
+    this.package_price += this.resShoes.price;
   }
 
 }

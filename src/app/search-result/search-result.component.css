@@ -17,14 +17,14 @@
     }
     .advance-button{
         position:absolute;
-        top: 6vh; 
+        top: 58px; 
         left:35vw;
     }
 }
 @media (min-width : 1108px){
     .advance-button{
         position:absolute;
-        top: 6vh; 
+        top: 58px; 
         left: 30vw;
     }
 }

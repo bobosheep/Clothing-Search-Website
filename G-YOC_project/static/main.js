@@ -296,21 +296,20 @@ var HomePageComponent = /** @class */ (function () {
         this.package_price = 0;
         this.getRandomMatch = function () {
             _this.queryClothes.from = Math.floor(Math.random() * 100);
-            _this.queryPants.from = Math.floor(Math.random() * 100);
+            _this.queryPants.from = Math.floor(Math.random() * 50);
             _this.queryShoes.from = Math.floor(Math.random() * 20);
             _this.package_price = 0;
             var womenOrmen = (_this.gender === 'Women' ? '女' : '男');
             _this.queryClothes.query.query_string.query = _this.clothesquerystring + womenOrmen;
             _this.queryPants.query.query_string.query = _this.pantsquerystring + womenOrmen;
             _this.queryShoes.query.query_string.query = _this.shoesquerystring + womenOrmen;
-            _this.http.post("/search", _this.queryClothes)
+            _this.http.post("/search", _this.queryClothes) //this.http.post(`http://localhost:5100/search`, this.queryClothes, this.httpOptions)
                 .subscribe(function (datas) {
                 var data = datas.hits.hits;
                 //console.log(data);
                 if (data.length > 0) {
                     _this.resClothes = data[0]._source;
                     _this.resClothes.price = parseInt(_this.resClothes.price);
-                    _this.package_price += _this.resClothes.price;
                     //console.log(this.resClothes);
                 }
             });
@@ -321,7 +320,6 @@ var HomePageComponent = /** @class */ (function () {
                 if (data.length > 0) {
                     _this.resPants = data[0]._source;
                     _this.resPants.price = parseInt(_this.resPants.price);
-                    _this.package_price += _this.resPants.price;
                     //console.log(this.resClothes);
                 }
             });
@@ -332,14 +330,20 @@ var HomePageComponent = /** @class */ (function () {
                 if (data.length > 0) {
                     _this.resShoes = data[0]._source;
                     _this.resShoes.price = parseInt(_this.resShoes.price);
-                    _this.package_price += _this.resShoes.price;
                     //console.log(this.resClothes);
                 }
             });
+            _this.package_price += _this.resClothes.price;
+            _this.package_price += _this.resPants.price;
+            _this.package_price += _this.resShoes.price;
         };
     }
     HomePageComponent.prototype.ngOnInit = function () {
         this.getRandomMatch();
+        this.package_price = 0;
+        this.package_price += this.resClothes.price;
+        this.package_price += this.resPants.price;
+        this.package_price += this.resShoes.price;
     };
     HomePageComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -364,7 +368,7 @@ var HomePageComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"columns\">\r\n    <div class=\"column\" id=\"website\" >\r\n        <p> Website: </p>\r\n        <label class=\"checkbox\" *ngFor=\"let web of checkboxs.websites\">\r\n            <input type=\"checkbox\" (click)=\"toggleWeb(web)\"> {{ web }}\r\n        </label>\r\n    </div>\r\n    <div class=\"column\" id=\"category\">\r\n        <p> Category: </p>\r\n        <label class=\"checkbox\" *ngFor=\"let category of checkboxs.categorys\">\r\n            <input type=\"checkbox\" (click)=\"toggleCategory(category)\"> {{ category }}\r\n        </label>\r\n    </div>\r\n    <div class=\"column\" id=\"color\">\r\n        <p> Colors: </p>\r\n        <label class=\"checkbox\" *ngFor=\"let color of checkboxs.colors\">\r\n            <input type=\"checkbox\" (click)=\"toggleColors(color)\" > {{ color }}\r\n        </label>\r\n    </div>\r\n    <div class=\"column\" id=\"size\">\r\n        <p> Sizes: </p>\r\n        <label class=\"checkbox\"  *ngFor=\"let size of checkboxs.sizes\">\r\n            <input type=\"checkbox\" (click)=\"toggleSizes(size)\"> {{ size }}\r\n        </label>\r\n    </div>\r\n    <!-- class=\"column\" id=\"price\">\r\n        <select (change)=\"OnSelectPrice($event)\">\r\n            <option *ngFor=\"let price of priceSelect.prices; let i = index\" [ngValue]=\"price\" [selected]=\"price == 'Default'\">{{ price }}</option>\r\n        </select>\r\n    </d-->\r\n</div>"
+module.exports = "<div class=\"columns\">\r\n    <div class=\"column\" id=\"website\" >\r\n        <p> Website: </p>\r\n        <label class=\"checkbox\" *ngFor=\"let web of checkboxs.websites\">\r\n            <input type=\"checkbox\" (click)=\"toggleWeb(web)\"> {{ web }}\r\n        </label>\r\n    </div>\r\n    <div class=\"column\" id=\"category\">\r\n        <p> Category: </p>\r\n        <label class=\"checkbox\" *ngFor=\"let category of checkboxs.categorys\">\r\n            <input type=\"checkbox\" (click)=\"toggleCategory(category)\"> {{ category }}\r\n        </label>\r\n    </div>\r\n    <div class=\"column\" id=\"color\">\r\n        <p> Colors: </p>\r\n        <label class=\"checkbox\" *ngFor=\"let color of checkboxs.colors\">\r\n            <input type=\"checkbox\" (click)=\"toggleColors(color)\" > {{ color }}\r\n        </label>\r\n    </div>\r\n    <!--div class=\"column\" id=\"size\">\r\n        <p> Sizes: </p>\r\n        <label class=\"checkbox\"  *ngFor=\"let size of checkboxs.sizes\">\r\n            <input type=\"checkbox\" (click)=\"toggleSizes(size)\"> {{ size }}\r\n        </label>\r\n    </div-->\r\n    <!-- class=\"column\" id=\"price\">\r\n        <select (change)=\"OnSelectPrice($event)\">\r\n            <option *ngFor=\"let price of priceSelect.prices; let i = index\" [ngValue]=\"price\" [selected]=\"price == 'Default'\">{{ price }}</option>\r\n        </select>\r\n    </d-->\r\n</div>"
 
 /***/ }),
 
@@ -436,7 +440,7 @@ var AdvanceSearchComponent = /** @class */ (function () {
         this.checkboxs = {
             websites: ['lativ', 'fiftypercent'],
             categorys: ['衣服', '外套', '褲裙', '內衣', '內褲', '鞋', '配件'],
-            colors: ['紅', '黃', '綠', '藍', '粉', '紫', '灰', '白', '黑'],
+            colors: ['紅', '橘', '黃', '綠', '藍', '粉', '紫', '灰', '白', '黑'],
             sizes: ['XS', 'S', 'M', 'L', 'XL']
         };
         this.priceSelect = {
@@ -471,7 +475,7 @@ var AdvanceSearchComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n\r\n.advance-button{\r\n    position:absolute;\r\n    top: 131px; \r\n    left:35vw;\r\n}\r\n@media (min-width : 769px){\r\n    .animate_left{\r\n        position: relative;\r\n        -webkit-animation: moveLeft .5s ease-out 1;\r\n        animation: moveLeft .5s ease-out 1 ;\r\n    }\r\n    .w-fix{\r\n        width: 70%;\r\n        margin-left: 15%;\r\n    }\r\n    .advance-button{\r\n        position:absolute;\r\n        top: 6vh; \r\n        left:35vw;\r\n    }\r\n}\r\n@media (min-width : 1108px){\r\n    .advance-button{\r\n        position:absolute;\r\n        top: 6vh; \r\n        left: 30vw;\r\n    }\r\n}\r\n.on_sale{\r\n    color: rgb(238, 235, 80);\r\n    background-color: rgb(226, 37, 37);\r\n}\r\n@-webkit-keyframes moveLeft{\r\n    0% {opacity: 0; padding-left: 62px;}\r\n    100% {opacity: 1; padding-left: 12px;}\r\n}\r\n@keyframes moveLeft{\r\n    0% {opacity: 0; padding-left: 62px;}\r\n    100% {opacity: 1; padding-left: 12px;}\r\n}\r\n.clothes_name{\r\n    color: rgb(46, 49, 82);\r\n}\r\n.clothes_name:hover{\r\n    color: rgb(87, 97, 212);\r\n}\r\n\r\n"
+module.exports = "\r\n\r\n.advance-button{\r\n    position:absolute;\r\n    top: 131px; \r\n    left:35vw;\r\n}\r\n@media (min-width : 769px){\r\n    .animate_left{\r\n        position: relative;\r\n        -webkit-animation: moveLeft .5s ease-out 1;\r\n        animation: moveLeft .5s ease-out 1 ;\r\n    }\r\n    .w-fix{\r\n        width: 70%;\r\n        margin-left: 15%;\r\n    }\r\n    .advance-button{\r\n        position:absolute;\r\n        top: 58px; \r\n        left:35vw;\r\n    }\r\n}\r\n@media (min-width : 1108px){\r\n    .advance-button{\r\n        position:absolute;\r\n        top: 58px; \r\n        left: 30vw;\r\n    }\r\n}\r\n.on_sale{\r\n    color: rgb(238, 235, 80);\r\n    background-color: rgb(226, 37, 37);\r\n}\r\n@-webkit-keyframes moveLeft{\r\n    0% {opacity: 0; padding-left: 62px;}\r\n    100% {opacity: 1; padding-left: 12px;}\r\n}\r\n@keyframes moveLeft{\r\n    0% {opacity: 0; padding-left: 62px;}\r\n    100% {opacity: 1; padding-left: 12px;}\r\n}\r\n.clothes_name{\r\n    color: rgb(46, 49, 82);\r\n}\r\n.clothes_name:hover{\r\n    color: rgb(87, 97, 212);\r\n}\r\n\r\n"
 
 /***/ }),
 
@@ -692,7 +696,7 @@ var SearchResultComponent = /** @class */ (function () {
                     sort: sortOption
                 };
                 console.log(queryBody);
-                _this.http.post("/search", queryBody)
+                _this.http.post("/search", queryBody) //this.http.post(`http://localhost:5100/search`, this.queryClothes, this.httpOptions)
                     .subscribe(function (datas) {
                     console.log(datas);
                     _this.response = datas.hits.hits;

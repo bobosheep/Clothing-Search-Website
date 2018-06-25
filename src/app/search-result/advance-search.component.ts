@@ -68,7 +68,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
       this.checkboxs = {
         websites: ['lativ', 'fiftypercent'],
         categorys: ['衣服', '外套', '褲裙', '內衣', '內褲', '鞋', '配件'],
-        colors: ['紅','黃', '綠', '藍','粉','紫','灰','白', '黑'],
+        colors: ['紅', '橘','黃', '綠', '青', '藍','粉','紫','灰','白', '黑'],
         sizes: ['XS', 'S', 'M', 'L', 'XL']
   
       }

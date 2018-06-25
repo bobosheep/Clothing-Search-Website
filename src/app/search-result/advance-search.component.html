@@ -17,12 +17,12 @@
             <input type="checkbox" (click)="toggleColors(color)" > {{ color }}
         </label>
     </div>
-    <div class="column" id="size">
+    <!--div class="column" id="size">
         <p> Sizes: </p>
         <label class="checkbox"  *ngFor="let size of checkboxs.sizes">
             <input type="checkbox" (click)="toggleSizes(size)"> {{ size }}
         </label>
-    </div>
+    </div-->
     <!-- class="column" id="price">
         <select (change)="OnSelectPrice($event)">
             <option *ngFor="let price of priceSelect.prices; let i = index" [ngValue]="price" [selected]="price == 'Default'">{{ price }}</option>

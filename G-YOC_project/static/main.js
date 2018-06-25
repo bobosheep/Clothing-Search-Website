@@ -252,9 +252,9 @@ var HomePageComponent = /** @class */ (function () {
         this.gender = 'Women';
         this.Women = 'is-active';
         this.Men = '';
-        this.clothesquerystring = "category:衣服 AND gender:";
-        this.pantsquerystring = "category:(褲 AND 裙) AND gender:";
-        this.shoesquerystring = "category:鞋 AND gender:";
+        this.clothesquerystring = "site:lativ AND category:衣服 AND gender:";
+        this.pantsquerystring = "site:lativ AND category:(褲 AND 裙) AND gender:";
+        this.shoesquerystring = "site:lativ AND category:鞋 AND gender:";
         this.queryClothes = {
             query: {
                 query_string: {
@@ -442,7 +442,7 @@ var AdvanceSearchComponent = /** @class */ (function () {
     };
     AdvanceSearchComponent.prototype.ngOnInit = function () {
         this.checkboxs = {
-            websites: ['lativ', 'fiftypercent'],
+            websites: ['lativ', 'fiftypercent', 'Uniqlo'],
             categorys: ['衣服', '外套', '褲裙', '內衣', '內褲', '鞋', '配件'],
             colors: ['紅', '橘', '黃', '綠', '青', '藍', '粉', '紫', '灰', '白', '黑'],
             sizes: ['XS', 'S', 'M', 'L', 'XL']

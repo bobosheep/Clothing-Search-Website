@@ -33,9 +33,9 @@ export class HomePageComponent implements OnInit {
   Women: string = 'is-active';
   Men: string = '';
 
-  clothesquerystring: string="category:衣服 AND gender:";
-  pantsquerystring: string="category:(褲 AND 裙) AND gender:";
-  shoesquerystring: string="category:鞋 AND gender:";
+  clothesquerystring: string="site:lativ AND category:衣服 AND gender:";
+  pantsquerystring: string="site:lativ AND category:(褲 AND 裙) AND gender:";
+  shoesquerystring: string="site:lativ AND category:鞋 AND gender:";
 
   queryClothes = {
     query : {

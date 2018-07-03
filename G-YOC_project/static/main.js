@@ -212,7 +212,7 @@ module.exports = ".animate_left{\r\n    position: relative;\r\n    -webkit-anima
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"section\">\r\n  <div class=\"container\">\r\n    <!--div class=\"columns\">\r\n      <div class=\"column\">\r\n\r\n      </div>\r\n    </div-->\r\n    <div routerLink=\"/home\" class=\"is-spaced\" style=\"margin-bottom: 20px;\">\r\n      <div class=\"image is-64x64 go-centered\"><img src=\"../assets/G-YOC.png\" alt=\"Logo\"></div>\r\n    </div>\r\n    <div class=\"buttons is-centered animate_left_1\">\r\n        <a routerLink=\"/search\" title=\"Search\" >\r\n          <span class=\"button is-large is-dark is-outlined\">Search!</span>    \r\n        </a>\r\n        <span class=\"button\" style=\"visibility: hidden;\"></span>\r\n        <a title=\"Match Your clothes\">\r\n          <span class=\"button is-large is-lite is-outlined\" (click)=\"getRandomMatch()\" >Match</span>       \r\n        </a>\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<div class=\"tabs is-centered\">\r\n  <ul>\r\n    <li [ngClass]=\"Women\" (click)=\"gender = 'Women';Women = 'is-active'; Men = ''; getRandomMatch()\"><a>Women</a></li>\r\n    <li [ngClass]=\"Men\"(click)=\"gender = 'Men'; Women = '' ; Men = 'is-active'; getRandomMatch()\" ><a>Men</a></li>\r\n  </ul>\r\n</div>\r\n\r\n<section class=\"section\" >\r\n  <div class=\"container\">\r\n    <div class=\"columns\">\r\n      <div class=\"column\">\r\n        <figure  class=\"image is-256x256\">\r\n          <a target=\"_blank\" href=\"{{ resClothes.url }}\">\r\n            <img src=\"{{ resClothes.img_url }}\">\r\n          </a>\r\n        </figure>\r\n      </div>\r\n      <div class=\"column\">\r\n        <figure class=\"image is-256x256\" >\r\n          <a target=\"_blank\" href=\"{{ resPants.url }}\">\r\n            <img src=\"{{ resPants.img_url }}\">\r\n          </a>\r\n        </figure>\r\n      </div>\r\n      <div class=\"column\">\r\n        <figure class=\"image is-256x256\">\r\n            <a target=\"_blank\" href=\"{{ resShoes.url }}\">\r\n              <img src=\"{{ resShoes.img_url }}\">\r\n            </a>\r\n        </figure>\r\n      </div>\r\n      \r\n    </div>\r\n    <div class=\"columns\">\r\n      <div class=\"column is-4 is-offset-4\">\r\n        <p class=\"has-text-centered package-price is-size-4\"> \r\n         Total Price <span class=\"has-text-danger\">{{ package_price | currency : 'TWD' :'symbol' :'3.0-0' }}</span>\r\n        </p>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<footer class=\"footer is-dark\">\r\n  <div class=\"container\">\r\n    <div class=\"content has-text-centered\">\r\n      <p>\r\n        This is a website for getting your own clothing.\r\n        <a routerLink=\"/instruction\" title=\"Instruction\"> Learn more</a>\r\n      </p>      \r\n      <p>\r\n        <a href=\"https://github.com/bobosheep/G-YOC\"><span class=\"icon is-medium has-text-black\"><i class=\"fab fa-github fa-2x\"></i></span></a>\r\n        <a href=\"https://www.facebook.com/G-YOC-139433063583923/\"><span class=\"icon is-medium\"><i class=\"fab fa-facebook fa-2x\" ></i></span></a>\r\n      </p>\r\n    </div>\r\n  </div>\r\n</footer>"
+module.exports = "<section class=\"section\">\r\n  <div class=\"container\">\r\n    <!--div class=\"columns\">\r\n      <div class=\"column\">\r\n\r\n      </div>\r\n    </div-->\r\n    <div routerLink=\"/home\" class=\"is-spaced\" style=\"margin-bottom: 20px;\">\r\n      <div class=\"image is-64x64 go-centered\"><img src=\"../assets/G-YOC.png\" alt=\"Logo\"></div>\r\n    </div>\r\n    <div class=\"buttons is-centered animate_left_1\">\r\n        <a routerLink=\"/search\" title=\"Search\" >\r\n          <span class=\"button is-large is-dark is-outlined\">Search!</span>    \r\n        </a>\r\n        <span class=\"button\" style=\"visibility: hidden;\"></span>\r\n        <a title=\"Match Your clothes\">\r\n          <span class=\"button is-large is-lite is-outlined\" (click)=\"getRandomMatch()\" >Match</span>       \r\n        </a>\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<div class=\"tabs is-centered\">\r\n  <ul>\r\n    <li [ngClass]=\"Women\" (click)=\"gender = 'Women';Women = 'is-active'; Men = ''; getRandomMatch()\"><a>Women</a></li>\r\n    <li [ngClass]=\"Men\"(click)=\"gender = 'Men'; Women = '' ; Men = 'is-active'; getRandomMatch()\" ><a>Men</a></li>\r\n  </ul>\r\n</div>\r\n\r\n<section class=\"section\" >\r\n  <div class=\"container\">\r\n    <div class=\"columns\">\r\n      <div class=\"column\">\r\n        <figure  class=\"image is-256x256\">\r\n          <a target=\"_blank\" href=\"{{ resClothes.url }}\">\r\n            <img src=\"{{ resClothes.img_url }}\">\r\n          </a>\r\n        </figure>\r\n      </div>\r\n      <div class=\"column\">\r\n        <figure class=\"image is-256x256\" >\r\n          <a target=\"_blank\" href=\"{{ resPants.url }}\">\r\n            <img src=\"{{ resPants.img_url }}\">\r\n          </a>\r\n        </figure>\r\n      </div>\r\n      <div class=\"column\">\r\n        <figure class=\"image is-256x256\">\r\n            <a target=\"_blank\" href=\"{{ resShoes.url }}\">\r\n              <img src=\"{{ resShoes.img_url }}\">\r\n            </a>\r\n        </figure>\r\n      </div>\r\n      \r\n    </div>\r\n    <div class=\"columns\" *ngIf=\"package_price > 0\">\r\n      <div class=\"column is-4 is-offset-4\">\r\n        <p class=\"has-text-centered package-price is-size-4\"> \r\n         Total Price <span class=\"has-text-danger\">{{ package_price | currency : 'TWD' :'symbol' :'3.0-0' }}</span>\r\n        </p>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<footer class=\"footer is-dark\">\r\n  <div class=\"container\">\r\n    <div class=\"content has-text-centered\">\r\n      <p>\r\n        This is a website for getting your own clothing.\r\n        <a routerLink=\"/instruction\" title=\"I`nstruction\"> Learn more</a>\r\n      </p>      \r\n      <p>\r\n        <a href=\"https://github.com/bobosheep/G-YOC\"><span class=\"icon is-medium has-text-black\"><i class=\"fab fa-github fa-2x\"></i></span></a>\r\n        <a href=\"https://www.facebook.com/G-YOC-139433063583923/\"><span class=\"icon is-medium\"><i class=\"fab fa-facebook fa-2x\" ></i></span></a>\r\n      </p>\r\n    </div>\r\n  </div>\r\n</footer>"
 
 /***/ }),
 
@@ -253,7 +253,7 @@ var HomePageComponent = /** @class */ (function () {
         this.Women = 'is-active';
         this.Men = '';
         this.clothesquerystring = "site:lativ AND category:衣服 AND gender:";
-        this.pantsquerystring = "site:lativ AND category:(褲 AND 裙) AND gender:";
+        this.pantsquerystring = "site:lativ AND category:褲裙 AND gender:";
         this.shoesquerystring = "site:lativ AND category:鞋 AND gender:";
         this.queryClothes = {
             query: {
@@ -297,10 +297,9 @@ var HomePageComponent = /** @class */ (function () {
             img_url: '',
             price: ''
         };
-        this.package_price = 0;
         this.getRandomMatch = function () {
-            _this.queryClothes.from = Math.floor(Math.random() * 100);
-            _this.queryPants.from = Math.floor(Math.random() * 50);
+            _this.queryClothes.from = Math.floor(Math.random() * 300);
+            _this.queryPants.from = Math.floor(Math.random() * 100);
             _this.queryShoes.from = Math.floor(Math.random() * 20);
             _this.package_price = 0;
             var womenOrmen = (_this.gender === 'Women' ? '女' : '男');
@@ -313,7 +312,7 @@ var HomePageComponent = /** @class */ (function () {
                 //console.log(data);
                 if (data.length > 0) {
                     _this.resClothes = data[0]._source;
-                    _this.resClothes.price = parseInt(_this.resClothes.price);
+                    _this.resClothes.price = _this.resClothes.price;
                     //console.log(this.resClothes);
                 }
             });
@@ -323,7 +322,7 @@ var HomePageComponent = /** @class */ (function () {
                 //console.log(data);
                 if (data.length > 0) {
                     _this.resPants = data[0]._source;
-                    _this.resPants.price = parseInt(_this.resPants.price);
+                    _this.resPants.price = _this.resPants.price;
                     //console.log(this.resClothes);
                 }
             });
@@ -333,21 +332,21 @@ var HomePageComponent = /** @class */ (function () {
                 //console.log(data);
                 if (data.length > 0) {
                     _this.resShoes = data[0]._source;
-                    _this.resShoes.price = parseInt(_this.resShoes.price);
+                    _this.resShoes.price = _this.resShoes.price;
                     //console.log(this.resClothes);
                 }
             });
-            _this.package_price += _this.resClothes.price;
-            _this.package_price += _this.resPants.price;
-            _this.package_price += _this.resShoes.price;
+            _this.package_price += parseInt(_this.resClothes.price);
+            _this.package_price += parseInt(_this.resPants.price);
+            _this.package_price += parseInt(_this.resShoes.price);
         };
     }
     HomePageComponent.prototype.ngOnInit = function () {
         this.getRandomMatch();
         this.package_price = 0;
-        this.package_price += this.resClothes.price;
-        this.package_price += this.resPants.price;
-        this.package_price += this.resShoes.price;
+        this.package_price += parseInt(this.resClothes.price);
+        this.package_price += parseInt(this.resPants.price);
+        this.package_price += parseInt(this.resShoes.price);
     };
     HomePageComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -815,7 +814,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"section\">\n  <div class=\"container\">\n    <div class=\"content\">\n      <h1 > <span class=\"has-text-link\"> 關於 </span>G-YOC  </h1>\n        <p> 一個搜尋服飾的網站，找你所需，選你所愛</p>\n      <h3 class=\"has-text-info\">  為什麼叫 G-YOC  </h3>\n        <ul>\n          <li> 因為可以\"G\"et \"Y\"our \"O\"wn \"C\"lothing   </li>\n          <li>  好聽又好記! </li>\n        </ul>\n      <h3 class=\"has-text-info\">  目前提供之服務  </h3>\n        <ul>\n          <li> 基本服裝搜尋  </li>\n          <li>  進階搜尋 </li>\n          <ul>\n            <li> 選擇特定網站搜尋 </li>\n            <li> 分類搜尋 </li>\n            <li> 指定顏色搜尋 </li>\n          </ul>\n          <li>  呈現方式 </li>\n          <ul>\n            <li> 搜尋預設排序 </li>\n            <li> 依價格高低排序 <br> (由低至高 或是 由高至低) </li>\n          </ul>\n          <li>  主動搭配 </li>\n          <ul>\n            <li> 提供衣服、褲子和鞋子的隨機配對 </li>\n            <li> 可以選擇男、女服裝做配對 </li>\n            <li>  貼心提供配對總價格  </li>\n            <li>  點選照片即可跳轉至購買頁面  </li>\n          </ul>\n        </ul>\n      <h3 class=\"has-text-info\">  服裝資訊來源        </h3>\n        <ul>\n          <li> <a href=\"https://www.lativ.com.tw/\"> Lativ </a>   </li>\n          <li> <a href=\"http://www.50-shop.com/Shop/\"> 50% </a>   </li>\n        </ul>\n      <h3 class=\"has-text-danger\">  注意事項        </h3>\n        <ol>\n          <li>  資料並不是即時更新，若本網站與該商品網站不符之處(例如:價格)，還請見諒。 </li>\n          <li>  本網站僅供學術研究使用，無商業行為。 </li>\n          <li>  若本網站搜尋結果使您不滿意，請停止瀏覽使用。 </li>\n        </ol>\n      <h4> 作者資訊 </h4>\n        <ul>\n          <li><h6>蔡帛洋</h6></li>\n          <ul>\n            <li>My <a href=\"https://github.com/bobosheep\">Github</a></li>\n            <li>My <a href=\"https://www.facebook.com/profile.php?id=100000047621325\">Facebook</a></li>\n            <li>My <a href=\"https://plus.google.com/113712373858994529361\">Google+</a></li>\n            <li>ianpaul32@gmail.com</li>\n          </ul> \n            \n            \n            \n        </ul>\n    </div>\n  </div>\n</section>\n"
+module.exports = "<section class=\"section\">\n  <div class=\"container\">\n    <div class=\"content\">\n      <h1 > <span class=\"has-text-link\"> 關於 </span>G-YOC  </h1>\n        <p> 一個搜尋服飾的網站，找你所需，選你所愛</p>\n      <h3 class=\"has-text-info\">  為什麼叫 G-YOC  </h3>\n        <ul>\n          <li> 因為可以\"G\"et \"Y\"our \"O\"wn \"C\"lothing   </li>\n          <li>  好聽又好記! </li>\n        </ul>\n      <h3 class=\"has-text-info\">  目前提供之服務  </h3>\n        <ul>\n          <li> 基本服裝搜尋  </li>\n          <li>  進階搜尋 </li>\n          <ul>\n            <li> 選擇特定網站搜尋 </li>\n            <li> 分類搜尋 </li>\n            <li> 指定顏色搜尋 </li>\n          </ul>\n          <li>  呈現方式 </li>\n          <ul>\n            <li> 搜尋預設排序 </li>\n            <li> 依價格高低排序 <br> (由低至高 或是 由高至低) </li>\n          </ul>\n          <li>  主動搭配 </li>\n          <ul>\n            <li> 提供衣服、褲子和鞋子的隨機配對 </li>\n            <li> 可以選擇男、女服裝做配對 </li>\n            <li>  貼心提供配對總價格  </li>\n            <li>  點選照片即可跳轉至購買頁面  </li>\n          </ul>\n        </ul>\n      <h3 class=\"has-text-info\">  服裝資訊來源        </h3>\n        <ul>\n          <li> <a href=\"https://www.lativ.com.tw/\"> Lativ </a>   </li>\n          <li> <a href=\"http://www.50-shop.com/Shop/\"> 50% </a>   </li>\n          <li> <a href=\"http://www.uniqlo.com/tw/\"> Uniqlo </a>   </li>\n        </ul>\n      <h3 class=\"has-text-danger\">  注意事項        </h3>\n        <ol>\n          <li>  資料並不是即時更新，若本網站與該商品網站不符之處(例如:價格)，還請見諒。 </li>\n          <li>  本網站僅供學術研究使用，無商業行為。 </li>\n          <li>  若本網站搜尋結果使您不滿意，請停止瀏覽使用。 </li>\n        </ol>\n      <h4> 作者資訊 </h4>\n        <ul>\n          <li><h6>蔡帛洋</h6></li>\n          <ul>\n            <li>My <a href=\"https://github.com/bobosheep\">Github</a></li>\n            <li>My <a href=\"https://www.facebook.com/profile.php?id=100000047621325\">Facebook</a></li>\n            <li>My <a href=\"https://plus.google.com/113712373858994529361\">Google+</a></li>\n            <li>ianpaul32@gmail.com</li>\n          </ul> \n            \n            \n            \n        </ul>\n    </div>\n  </div>\n</section>\n"
 
 /***/ }),
 

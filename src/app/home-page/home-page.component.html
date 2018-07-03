@@ -53,7 +53,7 @@
       </div>
       
     </div>
-    <div class="columns">
+    <div class="columns" *ngIf="package_price > 0">
       <div class="column is-4 is-offset-4">
         <p class="has-text-centered package-price is-size-4"> 
          Total Price <span class="has-text-danger">{{ package_price | currency : 'TWD' :'symbol' :'3.0-0' }}</span>
@@ -68,7 +68,7 @@
     <div class="content has-text-centered">
       <p>
         This is a website for getting your own clothing.
-        <a routerLink="/instruction" title="Instruction"> Learn more</a>
+        <a routerLink="/instruction" title="I`nstruction"> Learn more</a>
       </p>      
       <p>
         <a href="https://github.com/bobosheep/G-YOC"><span class="icon is-medium has-text-black"><i class="fab fa-github fa-2x"></i></span></a>

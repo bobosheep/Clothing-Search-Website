@@ -4,8 +4,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Web Layout
 
-![home page result](https://i.imgur.com/4ZUVOny.png)
-![search page result](https://i.imgur.com/qGEUlm9.png)
+![home page result](page_result/HomePage-v1.0.2.png)
+![search page result](page_result/SearchPage-v1.0.2.png)
+![instruction page result](page_result/InstructionPage-v1.0.2.PNG)
 
 ## Development server
 
